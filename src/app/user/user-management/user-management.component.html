@@ -1,0 +1,19 @@
+<div class='error-message alert alert-danger' *ngIf='errorMessage'>Error: {{errorMessage}}</div>
+
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <h1> {{pageTitle}}</h1>
+    </div>
+</div>
+
+<div class="row" *ngIf='user'>
+
+  <div class="col-md-10 col-md-offset-1 col-xs-12" *ngIf='user.id'>
+    Show user...
+    <pre>{{user | json}}</pre>
+  </div>
+
+  <div class="col-md-10 col-md-offset-1 col-xs-12" *ngIf='!user.id'>
+    TODO: Create new user form
+  </div>
+</div>
