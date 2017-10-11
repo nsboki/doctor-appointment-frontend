@@ -5,9 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserManagementComponent } from './user/user-management/user-management.component';
 import { HomeComponent } from './home/home.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { USER_ROUTES } from './user/user.routes';
 
 const appRoutes: Routes = [
     //COMMON
@@ -18,13 +20,18 @@ const appRoutes: Routes = [
     },
     
     //PUBLIC
+    { 
+        path: 'login',
+        component: LoginFormComponent
+    },
     {
         path: 'home',
         component: HomeComponent
     },
     {
         path: 'users',
-        component: UserListComponent
+        component: UserListComponent,
+        children: USER_ROUTES
     },
     {
         path: 'user/:id',

@@ -1,29 +1,3 @@
-<div class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="navbar-collapse collapse login-menu" id="navbar-main">
-        <ul class="nav navbar-nav">
-          
-          <li>
-            <a [routerLink]="['']" class="navbar-brand"><img src="assets/img/menu_item.jpg" class="header-image-left" />Home</a>
-          </li>
-          <li>
-            <a [routerLink]="['users']" class="navbar-brand"><img src="assets/img/menu_item.jpg" class="header-image-left" />Users</a>
-          </li>
-          
-        </ul>
-      </div>
-  </div>
-</div>
 
-<div class="page-content">
-  <div class="container">
+<app-header></app-header>
     <router-outlet></router-outlet>
-  </div>
-</div>

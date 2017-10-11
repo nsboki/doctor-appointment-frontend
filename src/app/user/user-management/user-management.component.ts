@@ -38,13 +38,13 @@ export class UserManagementComponent implements OnInit {
             error => this.errorMessage = <any>error);
         } else {
           this.pageTitle = "Create new user";
-          this.user = {
-            id: null,
-            role: "",
-            username: "",
-            password: "",
-            regDate: ""
-          };
+//          this.user = {
+//            id: null,
+//            role: "",
+//            username: "",
+//            password: "",
+//            regDate: null
+//          };
         }
 
       });
