@@ -9,6 +9,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { UserComponent } from './user/user.component';
 import { USER_ROUTES } from './user/user.routes';
 
 const appRoutes: Routes = [
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'users',
-        component: UserListComponent,
+        component: UserComponent,
         children: USER_ROUTES
     },
     {

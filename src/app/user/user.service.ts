@@ -39,6 +39,13 @@ export class UserService {
         return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users/save", newUser)
             .catch(this._apiService.handleError);
     }
+  
+    editUser(selctedUser: IUser, newUser: IUser ) {
+      
+        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users/save", newUser)
+            .catch(this._apiService.handleError);
+      
+    }
 
     deleteUser(userId: number) {
 

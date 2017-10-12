@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
@@ -19,6 +19,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { UserStartComponent } from './user/user-start.component';
 import { UserComponent } from './user/user.component';
 import { UserItemComponent } from './user/user-list/user-item.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +31,16 @@ import { UserItemComponent } from './user/user-list/user-item.component';
     LoginFormComponent,
     UserComponent,
     UserStartComponent,
-    UserItemComponent
+    UserItemComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     CommonModule,
-    AppGlobalRouting
+    AppGlobalRouting,
+    ReactiveFormsModule
   ],
   providers: [AuthProviders, ApiService, UserService],
   bootstrap: [AppComponent]

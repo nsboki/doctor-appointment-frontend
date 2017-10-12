@@ -1,46 +1,27 @@
-<div class='error-message alert alert-danger' *ngIf='errorMessage'>Error: {{errorMessage}}</div>
+<div class='error-message alert alert-danger' *ngIf='errorMessage'>Error:
+	{{errorMessage}}</div>
 
 <div class="row">
-    <div class="col-md-12 col-xs-12">
-        <h1> {{pageTitle}}</h1>
-    </div>
+	<div class="col-md-12 col-xs-12">
+		<h1>{{pageTitle}}</h1>
+	</div>
 </div>
 
 <div class="row" *ngIf='allUsers'>
-    <div class="col-md-10 col-md-offset-1 col-xs-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="order-column">#</th>
-                    <th>User id</th>
-                    <th>Role</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Registration date</th>
-                </tr>
-            </thead>
-            <tbody *ngIf='allUsers && allUsers.length'>
-                <tr *ngFor='let user of allUsers; let i = index'>
-                    <td> {{ i + 1 }} </td>
-                    <td> <a [routerLink]="['/user', user.id]">{{user.id}}</a> </td>
-                    <td> {{user.role}} </td>
-                    <td> {{user.username}}</td>
-                    <td> {{user.password}}</td>
-                    <td> {{user.regDate}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1 col-xs-6">
+			<button class="btn btn-success" [routerLink]="['new']">New
+				user</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 col-xs-6">
+			<ul class="list-group">
+				<app-user-item *ngFor="let user of allUsers; let i = index"
+					[user]="user" [userId]="i+1"></app-user-item>
+			</ul>
+		</div>
+	</div>
 </div>
-<div class="row">
-    <div class="col-md-2 col-md-offset-1 col-xs-12">
-        <button class="btn btn-success" [routerLink]="['new']">New user</button>
-    </div>
-    <div class="col-md-2 col-xs-12">
-        <button class="" (click)='showInfoMessage()'>Show/Hide test info</button>
-    </div>
-    <div class="col-md-7 col-xs-12">
-        {{infoMessage}}
-    </div>
-</div>
+
 
