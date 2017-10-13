@@ -8,8 +8,7 @@ import { IUser } from '../user';
 
 @Component({
   selector: 'app-user-management',
-  templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.css']
+  templateUrl: './user-management.component.html'
 })
 export class UserManagementComponent implements OnInit {
 
@@ -18,7 +17,8 @@ export class UserManagementComponent implements OnInit {
 
   private sub: Subscription;
 
-  selectedUser:IUser;
+  selectedUser:IUser = null;
+  editStatus: boolean;
 
   constructor(private _router: Router,
     private _route: ActivatedRoute,
@@ -26,18 +26,22 @@ export class UserManagementComponent implements OnInit {
   } 
 
   ngOnInit() {
-
+    this.editStatus = false;
     this.sub = this._route.params.subscribe(
       params => {
         let id = +params['id'];
 
         if (id) {
-          this.pageTitle = "User details";
           this._userService.getUser(id).subscribe(
             user => this.selectedUser = user,
             error => this.errorMessage = <any>error);
+          if(this.editStatus) {
+            this.pageTitle = "Edit user details";
+          } else {
+            this.pageTitle = "User details";
+          }
         } else {
-          this.pageTitle = "Create new user";
+          this.pageTitle = "Select a user";
 //          this.user = {
 //            id: null,
 //            role: "",
@@ -51,7 +55,22 @@ export class UserManagementComponent implements OnInit {
   }
   
   onEdit() {
+    this.editStatus = true;
     this._router.navigate(['/users', this.selectedUser.id, 'edit']);
+  }
+  
+  onSave() {
+    this.editStatus = false;
+    this._userService.editUser(this.selectedUser);
+  }
+  
+  onCancel() {
+    this.editStatus = false;
+  }
+  
+  onDelete() {
+    this._userService.deleteUser(this.selectedUser.id);
+    this._router.navigate(['/users']);
   }
 
 }

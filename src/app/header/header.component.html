@@ -14,10 +14,10 @@
           <li>
             <a [routerLink]="['']" class="navbar-brand">Home</a>
           </li>
-          <li>
+          <li routerLinkActive="active">
           	<a [routerLink]="['login']" class="navbar-brand" *ngIf="!isAuth()">Login</a>
           </li>
-          <li>
+          <li routerLinkActive="active">
             <a [routerLink]="['users']" class="navbar-brand">Users</a>
           </li>
           

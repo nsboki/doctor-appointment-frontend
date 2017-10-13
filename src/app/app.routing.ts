@@ -34,14 +34,6 @@ const appRoutes: Routes = [
         component: UserComponent,
         children: USER_ROUTES
     },
-    {
-        path: 'user/:id',
-        component: UserManagementComponent
-    },
-    {
-        path: 'newuser',
-        component: UserManagementComponent
-    },
    
 
     {

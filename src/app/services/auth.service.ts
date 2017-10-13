@@ -92,7 +92,7 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-    return this.http.delete(url, options);
+    return this.http.delete(url );
   }
   /**
    * @param options if options are not supplied the default content type is application/json

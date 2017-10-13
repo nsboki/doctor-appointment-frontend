@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<h1>{{pageTitle}}</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+		<h2>{{selectedUser?.username}}</h2>
+	</div>
+	<div class="col-xs-12">
+		<button class="btn btn-primary" (click)="onEdit()">Edit</button>
+		<button class="btn btn-danger" (click)="onDelete()">Delete</button>
+	</div>
+	<div class="col-xs-12">
+		<ul class="list-group">
+			<li class="list-group-item"><label>ID:</label>
+				<p>{{selectedUser?.id}}</p></li>
+			<li class="list-group-item"><label>First name:</label>
+				<p>{{selectedUser?.firstName}}</p></li>
+			<li class="list-group-item"><label>Last name:</label>
+				<p>{{selectedUser?.lastName}}</p></li>
+			<li class="list-group-item"><label>e-mail:</label>
+				<p>{{selectedUser?.email}}</p></li>
+			<li class="list-group-item"><label>Role:</label>
+				<p>{{selectedUser?.role}}</p></li>
+			<li class="list-group-item"><label>Registration date:</label>
+				<p>{{selectedUser?.regDate}}</p></li>
+
+		</ul>
+
+	</div>
+</div>

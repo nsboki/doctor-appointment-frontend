@@ -6,8 +6,7 @@ import { IUser } from '../user';
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {
 
@@ -25,14 +24,6 @@ export class UserListComponent implements OnInit {
     this._userService.getUsers().subscribe(
           users => this.allUsers = users,
           error => this.errorMessage = <any>error);
-  }
-
-  showInfoMessage() {
-    if(this.infoMessage) {
-      this.infoMessage = null; // delete info message
-    } else {
-      this.infoMessage = "Info returned from component.";
-    }
   }
 
 }
