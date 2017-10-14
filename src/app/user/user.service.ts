@@ -17,6 +17,8 @@ import { IUser } from './user';
 export class UserService {
 
     userChanged = new EventEmitter<IUser[]>();
+    errorMessage: string;
+    allUsers:IUser[];
   
     constructor(private _http: Http, private _authService: AuthService, private _apiService: ApiService) { }
 
@@ -39,6 +41,8 @@ export class UserService {
     createNewUser(newUser: IUser){
 
         return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users/save", newUser)
+            .map((response: Response) => <IUser[]> response.json())
+//            .do(this.userChanged.emit(this.getUsers()))
             .catch(this._apiService.handleError);
     }
   
@@ -49,12 +53,14 @@ export class UserService {
     }
 
     deleteUser(userId: number) {
-      this._http.delete(this._apiService.ServerUrl + "/api/users/" + userId);
-      
-//      this.http.delete().subscribe((res) => {
-//});
-//        return this._authService.AuthDelete(this._apiService.ServerUrl + "/api/users/" + userId)
-//            .catch(this._apiService.handleError);
+        this._authService.AuthDelete(this._apiService.ServerUrl + "/api/users/" + userId)
+            .map((response: Response) => this.userChanged.emit(<IUser[]> response.json()))
+            .do(data => console.log('All returned users: ' +  JSON.stringify(data)))
+          .catch(this._apiService.handleError);
+//      this.getUsers().subscribe(
+//          users => 
+//          this.userChanged.emit(users),
+//          error => this.errorMessage = <any>error);
     }
 
 }

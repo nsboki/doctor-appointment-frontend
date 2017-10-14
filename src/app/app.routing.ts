@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     //COMMON
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/users',
         pathMatch: 'full'
     },
     
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
 
     {
         path: '**',
-        redirectTo: '/home',
+        redirectTo: '/users',
         pathMatch: 'full'
     }
 ];

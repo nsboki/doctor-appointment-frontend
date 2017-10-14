@@ -13,7 +13,6 @@ export const AngularServerUrl: string = "http://" + GeneralServerIp + ":4200";
 export class AuthService {
 
   private authenticated: boolean;
-  
   authHeaders: Headers;
 
   constructor(private http: Http, private _router: Router) {
@@ -57,14 +56,14 @@ export class AuthService {
    * @param options if options are not supplied the default content type is application/json
    */
   AuthGet(url: string, options?: RequestOptions): Observable<Response> {
-
-    if (options) {
-      options = this._setRequestOptions(options);
-    }
-    else {
-      options = this._setRequestOptions();
-    }
-    return this.http.get(url, options);
+//    let tempOptions = this._setRequestOptions(options);
+//    if (options) {
+//      options = this._setRequestOptions(options);
+//    }
+//    else {
+//      options = this._setRequestOptions();
+//    }
+    return this.http.get(url, this._setRequestOptions(options));
   }
   /**
    * @param options if options are not supplied the default content type is application/json
@@ -85,20 +84,24 @@ export class AuthService {
    * @param options if options are not supplied the default content type is application/json
    */
   AuthDelete(url: string, options?: RequestOptions): Observable<Response> {
-
+    
     if (options) {
       options = this._setRequestOptions(options);
     }
     else {
       options = this._setRequestOptions();
     }
-    return this.http.delete(url );
+//    this.http.delete(url, options)
+//      .subscribe((data)=>{
+//        console.log(data)});
+//    this._router.navigate(['../']);
+    return this.http.delete(url, options);
   }
   /**
    * @param options if options are not supplied the default content type is application/json
    */
   AuthPost(url: string, data: any, options?: RequestOptions): Observable<Response> {
-
+    let response;
     let body = JSON.stringify(data);
 
     if (options) {
@@ -107,11 +110,12 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-    return this.http.post(url, body, options);
+    this.http.post(url, body, options).subscribe((res)=>{response = res});
+    return response
   }
 
   private _setRequestOptions(options?: RequestOptions) {
-    
+      
     if (!options) {
       this.authHeaders = new Headers();
       this.authHeaders.set('Content-Type', 'application/json');

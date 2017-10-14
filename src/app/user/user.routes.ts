@@ -7,8 +7,8 @@ import { Routes } from '@angular/router';
 
 
 export const USER_ROUTES: Routes = [
-  { path:'', component: UserManagementComponent},
-  { path:'new', component: UserManagementComponent },
-  { path:':id', component: UserManagementComponent},
-  { path:':id/edit', component: UserManagementComponent }
+  { path:'', component: UserStartComponent},
+  { path:'new', component: UserEditComponent },
+  { path:':id', component: UserDetailComponent},
+  { path:':id/edit', component: UserEditComponent }
 ]; 

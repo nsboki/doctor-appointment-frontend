@@ -12,18 +12,18 @@
         <ul class="nav navbar-nav">
           
           <li>
-            <a [routerLink]="['']" class="navbar-brand">Home</a>
+            <a [routerLink]="['']" class="navbar-brand"> Home </a>
           </li>
           <li routerLinkActive="active">
-          	<a [routerLink]="['login']" class="navbar-brand" *ngIf="!isAuth()">Login</a>
+          	<a [routerLink]="['login']" class="navbar-brand" *ngIf="!isAuth()"> Login </a>
           </li>
           <li routerLinkActive="active">
-            <a [routerLink]="['users']" class="navbar-brand">Users</a>
+            <a [routerLink]="['users']" class="navbar-brand"> Users </a>
           </li>
           
         </ul>
         <ul class="nav navbar-nav navbar-right" *ngIf="isAuth()">
-          <li><a (click)="onLogout()" style="cursor: pointer;" class="navbar-brand">Logout</a></li>
+          <li><a (click)="onLogout()" style="cursor: pointer;" class="navbar-brand"> Logout </a></li>
         
         </ul>
       </div>

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserItemComponent implements OnInit {
 
-  @Input()  user: IUser;
+  @Input() user: IUser;
   @Input() userId: number;
   
   
