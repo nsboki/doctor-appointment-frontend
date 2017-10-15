@@ -1,21 +1,19 @@
 <div class="row">
 	<div class="col-md-12 col-xs-12">
-		<h1>Edit user</h1>
+		<h1>Create new user</h1>
 	</div>
 </div>
 
 <div class="row">
-	<form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+	<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
 		<div class="col-xs-12">
 		</div>
 		<div class="col-xs-12">
-			<button type="submit" class="btn btn-primary" [disabled]="!updateUserForm.valid">Update</button>
+			<button type="submit" class="btn btn-success" [disabled]="!newUserForm.valid">Create</button>
 			<button class="btn btn-danger" (click)="onCancel()">Cancel</button>
 		</div>
 		<div class="col-xs-12">
 			<ul class="list-group">
-				<li class="list-group-item"><label>ID:</label> 
-					<input disabled="disabled" type="text" formControlName="id"></li>
 				<li class="list-group-item"><label>Username:</label> 
 					<input type="text" formControlName="username"></li>
 				<li class="list-group-item"><label>Password:</label> 
@@ -26,13 +24,7 @@
 					<input type="text" formControlName="lastName"></li>
 				<li class="list-group-item"><label>e-mail:</label> 
 					<input type="text" formControlName="email"></li>
-				<li class="list-group-item"><label>Role:</label> 
-					<input disabled="disabled" type="text" formControlName="role"></li>
-				<li class="list-group-item"><label>Registration date:</label> 
-					<input disabled="disabled" type="text" formControlName="regDate"></li>
-					
 			</ul>
 		</div>
 	</form>
 </div>
-

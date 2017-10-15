@@ -1,7 +1,7 @@
 import { IUser } from '../user';
 import { UserService } from '../user.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,11 +12,19 @@ import { Subscription } from 'rxjs';
 
 export class UserEditComponent implements OnInit, OnDestroy {
 
-  private user: IUser = null;
+  updateUserForm = new FormGroup({
+      id: new FormControl(),
+      username: new FormControl(),
+      password: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      email: new FormControl(),
+      role: new FormControl(),
+      regDate: new FormControl()
+  });
   
-  userForm: FormGroup;
+  private selectedUser: IUser;
   private userId: number;
-  private isNew = true;
   private sub: Subscription;
   private errorMessage: string;
   
@@ -26,32 +34,23 @@ export class UserEditComponent implements OnInit, OnDestroy {
               private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.user = null;
+    this.selectedUser = null;
     this.sub = this._route.params.subscribe(
       (params: any) => {
-        if (params.hasOwnProperty('id')) {
-          this.isNew = false;
-          this.userId = +params['id'];
+          this.userId = params['id'];
           this._userService.getUser(this.userId)
             .subscribe(     
-              user => this.user = user,
+              user => {this.selectedUser = user;
+                this.initForm()},
               error => this.errorMessage = <any>error);
-        } else {
-          this.isNew = true;
-          this.user = null;
-        }
-        this.initForm();
       }
     );
+    
   }
   
   onSubmit() {
-    const newUser = this.userForm.value;
-    if(this.isNew) {
-      this._userService.createNewUser(newUser);
-    } else {
-      this._userService.editUser(newUser);
-    }
+    const newUser = this.updateUserForm.value;
+    this._userService.updateUser(newUser);
     this.navigateBack();
   }
   
@@ -64,36 +63,27 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
   
   private navigateBack() {
-    this._router.navigate(['../']);
+    this._router.navigate(['/users']);
   }
   
   private initForm() {
-    let id:number;
-    let username = '';
-    let password = '';
-    let firstName = '';
-    let lastName = '';
-    let email = '';
-    let role = '';
-    let regDate;
-    
-    if(!this.isNew) {
-      username = this.user.username;
-      id = this.user.id;
-      password = this.user.password;
-      firstName = this.user.firstName;
-      lastName = this.user.lastName;
-      email = this.user.email;
-      role = this.user.role;
-      regDate = this.user.regDate;
-    }
-    this.userForm = this._formBuilder.group({
-      username: [username, Validators.required],
-      password: [password, Validators.required],
-      firstName: [firstName, Validators.required],
-      lastName: [lastName, Validators.required],
-      email: [email, Validators.required],
-//      role: [role, Validators.required]
+//    let id = this.userId;
+//    let username = this.selectedUser.username;
+//    let password = this.selectedUser.password;
+//    let firstName = this.selectedUser.firstName;
+//    let lastName = this.selectedUser.lastName;
+//    let email = this.selectedUser.email;
+//    let role = this.selectedUser.role;
+//    let regDate = this.selectedUser.regDate;
+    this.updateUserForm = this._formBuilder.group({
+      id: [{value:this.selectedUser.id, disabled: true}, Validators.required],
+      username: [this.selectedUser.username, Validators.required],
+      password: [this.selectedUser.password, Validators.required],
+      firstName: [this.selectedUser.firstName, Validators.required],
+      lastName: [this.selectedUser.lastName, Validators.required],
+      email: [this.selectedUser.email, Validators.email],
+      role: [this.selectedUser.role, Validators.required],
+      regDate: [this.selectedUser.regDate, Validators.required]
     });
     
   }

@@ -60,7 +60,7 @@ export class UserManagementComponent implements OnInit {
   
   onSave() {
     this.editStatus = false;
-    this._userService.editUser(this.selectedUser);
+//    this._userService.editUser(this.selectedUser.id, this.selectedUser);
   }
   
   onCancel() {

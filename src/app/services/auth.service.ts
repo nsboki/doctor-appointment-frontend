@@ -91,11 +91,11 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-//    this.http.delete(url, options)
-//      .subscribe((data)=>{
-//        console.log(data)});
+    this.http.delete(url, options)
+      .subscribe((data)=>{
+        console.log(data)});
 //    this._router.navigate(['../']);
-    return this.http.delete(url, options);
+    return null;
   }
   /**
    * @param options if options are not supplied the default content type is application/json
@@ -111,7 +111,7 @@ export class AuthService {
       options = this._setRequestOptions();
     }
     this.http.post(url, body, options).subscribe((res)=>{response = res});
-    return response
+    return this.http.post(url, body, options);
   }
 
   private _setRequestOptions(options?: RequestOptions) {

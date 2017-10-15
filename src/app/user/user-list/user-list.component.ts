@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.service';
@@ -17,7 +17,8 @@ export class UserListComponent implements OnInit {
   infoMessage:string;
   
   constructor(private _router: Router,
-    private _userService: UserService) {
+              private _userService: UserService,
+              private _route: ActivatedRoute) {
   } 
 
   ngOnInit() {

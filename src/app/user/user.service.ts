@@ -39,28 +39,45 @@ export class UserService {
     }
 
     createNewUser(newUser: IUser){
-
-        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users/save", newUser)
-            .map((response: Response) => <IUser[]> response.json())
-//            .do(this.userChanged.emit(this.getUsers()))
-            .catch(this._apiService.handleError);
+      this._http.post(this._apiService.ServerUrl + "/api/users/save", newUser).subscribe((data) => {this.emitUserChanges()});
     }
   
-    editUser(newUser: IUser ) {
-        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users/save", newUser)
-            .catch(this._apiService.handleError);
+    updateUser(newUser: IUser ) {
+      this._http.post(this._apiService.ServerUrl + "/api/users/save", newUser)
+        .subscribe((data) => this.emitUserChanges())
+//        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users"+ userId + "save", newUser)
+//            .catch(this._apiService.handleError);
       
     }
 
     deleteUser(userId: number) {
-        this._authService.AuthDelete(this._apiService.ServerUrl + "/api/users/" + userId)
-            .map((response: Response) => this.userChanged.emit(<IUser[]> response.json()))
-            .do(data => console.log('All returned users: ' +  JSON.stringify(data)))
-          .catch(this._apiService.handleError);
+      this._http.delete(this._apiService.ServerUrl + "/api/users/" + userId)
+                    .subscribe(
+                    (data: any) => {this.emitUserChanges()});
+//        this._authService.AuthDelete(this._apiService.ServerUrl + "/api/users/" + userId)
+//            .map((response: Response) => this.userChanged.emit(<IUser[]> response.json()))
+//            .do(data => console.log('All returned users: ' +  JSON.stringify(data)))
+//          .catch(this._apiService.handleError);
 //      this.getUsers().subscribe(
 //          users => 
 //          this.userChanged.emit(users),
 //          error => this.errorMessage = <any>error);
     }
-
+//    private _setRequestOptions(options?: RequestOptions) {
+//      
+//    if (!options) {
+//      this.authHeaders = new Headers();
+//      this.authHeaders.set('Content-Type', 'application/json');
+//      options = new RequestOptions({ headers: this.authHeaders});
+//    }
+//    
+//    return options;
+//
+//}
+  emitUserChanges() {
+    this.getUsers().subscribe(
+        users => 
+        this.userChanged.emit(users)
+      )
+  }
 }
