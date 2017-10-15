@@ -42,8 +42,8 @@ export class UserService {
       this._http.post(this._apiService.ServerUrl + "/api/users/save", newUser).subscribe((data) => {this.emitUserChanges()});
     }
   
-    updateUser(newUser: IUser ) {
-      this._http.post(this._apiService.ServerUrl + "/api/users/save", newUser)
+    updateUser(newUser: IUser) {
+      this._http.put(this._apiService.ServerUrl + "/api/users/save", newUser)
         .subscribe((data) => this.emitUserChanges())
 //        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users"+ userId + "save", newUser)
 //            .catch(this._apiService.handleError);

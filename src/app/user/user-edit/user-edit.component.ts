@@ -76,7 +76,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 //    let role = this.selectedUser.role;
 //    let regDate = this.selectedUser.regDate;
     this.updateUserForm = this._formBuilder.group({
-      id: [{value:this.selectedUser.id, disabled: true}, Validators.required],
+      id: [this.selectedUser.id, Validators.required],
       username: [this.selectedUser.username, Validators.required],
       password: [this.selectedUser.password, Validators.required],
       firstName: [this.selectedUser.firstName, Validators.required],
