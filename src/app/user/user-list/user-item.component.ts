@@ -11,6 +11,7 @@ export class UserItemComponent implements OnInit {
 
   @Input() user: IUser;
   @Input() userId: number;
+  @Input() itemIndex: number;
   
   
   constructor(private _userService: UserService,

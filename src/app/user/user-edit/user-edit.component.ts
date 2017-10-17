@@ -27,6 +27,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   private userId: number;
   private sub: Subscription;
   private errorMessage: string;
+  guestUserRole=false;
   
   constructor(private _router: Router,
               private _route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
               private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    
     this.selectedUser = null;
     this.sub = this._route.params.subscribe(
       (params: any) => {
@@ -41,11 +43,16 @@ export class UserEditComponent implements OnInit, OnDestroy {
           this._userService.getUser(this.userId)
             .subscribe(     
               user => {this.selectedUser = user;
-                this.initForm()},
+                this.initForm();
+                if(this.selectedUser.role=="ROLE_GUEST"){
+                  this.guestUserRole = true;
+                } else {
+                  this.guestUserRole = false;
+                }
+                },
               error => this.errorMessage = <any>error);
       }
     );
-    
   }
   
   onSubmit() {
@@ -55,6 +62,27 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
   
   onCancel() {
+    this.navigateBack();
+  }
+  
+  onSetDoctor() {
+    let newUser = this.updateUserForm.value;
+    newUser.role = "ROLE_DOCTOR";
+    this._userService.updateUser(newUser);
+    this.navigateBack();
+  }
+  
+  onSetPatient() {
+    let newUser = this.updateUserForm.value;
+    newUser.role = "ROLE_PATIENT";
+    this._userService.updateUser(newUser);
+    this.navigateBack();
+  }
+  
+  onSetAdmin() {
+    let newUser = this.updateUserForm.value;
+    newUser.role = "ROLE_ADMIN";
+    this._userService.updateUser(newUser);
     this.navigateBack();
   }
 
@@ -67,14 +95,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
   
   private initForm() {
-//    let id = this.userId;
-//    let username = this.selectedUser.username;
-//    let password = this.selectedUser.password;
-//    let firstName = this.selectedUser.firstName;
-//    let lastName = this.selectedUser.lastName;
-//    let email = this.selectedUser.email;
-//    let role = this.selectedUser.role;
-//    let regDate = this.selectedUser.regDate;
     this.updateUserForm = this._formBuilder.group({
       id: [this.selectedUser.id, Validators.required],
       username: [this.selectedUser.username, Validators.required],

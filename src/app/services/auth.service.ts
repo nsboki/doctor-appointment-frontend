@@ -24,7 +24,7 @@ export class AuthService {
   }
   logout() {
     this.authenticated = false;
-    this._router.navigate(["login"]);
+    this._router.navigate(["/login"]);
     console.log(this.isAuthenticated());
   }
   

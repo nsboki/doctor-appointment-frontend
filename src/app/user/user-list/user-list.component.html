@@ -17,10 +17,8 @@
 		<div class="col-md-10 col-md-offset-1 col-xs-6">
 			<ul class="list-group">
 				<app-user-item *ngFor="let user of allUsers; let i = index"
-					[user]="user" [userId]="user.id"></app-user-item>
+					[user]="user" [userId]="user.id" [itemIndex]="i+1"></app-user-item>
 			</ul>
 		</div>
 	</div>
 </div>
-
-

@@ -1,7 +1,9 @@
 <a [routerLink]="[userId]" class="list-group-item clearfix" routerLinkActive="active">
   <div class="pull-left">
-    <h4 class="list-group-item-heading">{{user.id}} - {{user.username}}</h4>
+    <h4 class="list-group-item-heading">{{[itemIndex]}} - {{user.username}}</h4>
     <p class="list-group-item-text">{{user.lastName}}  {{user.firstName}}</p>
   </div>
-  
+  <div class="pull-right">
+  	<p class="list-gorup-item-text"> {{user.role}} </p>
+  </div>
 </a>

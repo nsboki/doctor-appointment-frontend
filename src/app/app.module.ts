@@ -22,6 +22,13 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserStartComponent } from './user/user-start.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserNewComponent } from './user/user-new/user-new.component';
+import { DoctorComponent } from './doctor/doctor.component';
+import { DoctorListComponent } from './doctor/doctor-list/doctor-list.component';
+import { DoctorItemComponent } from './doctor/doctor-list/doctor-item.component';
+import { DoctorDetailComponent } from './doctor/doctor-detail/doctor-detail.component';
+import { DoctorService } from './doctor/doctor.service';
+import { DoctorStartComponent } from './doctor/doctor-start.component';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,12 @@ import { UserNewComponent } from './user/user-new/user-new.component';
     UserEditComponent,
     UserStartComponent,
     UserDetailComponent,
-    UserNewComponent
+    UserNewComponent,
+    DoctorComponent,
+    DoctorListComponent,
+    DoctorItemComponent,
+    DoctorDetailComponent,
+    DoctorStartComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +58,7 @@ import { UserNewComponent } from './user/user-new/user-new.component';
     AppGlobalRouting,
     ReactiveFormsModule
   ],
-  providers: [AuthProviders, ApiService, UserService],
+  providers: [AuthProviders, ApiService, UserService, DoctorService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

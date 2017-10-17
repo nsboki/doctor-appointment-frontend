@@ -20,11 +20,23 @@
           <li routerLinkActive="active">
             <a [routerLink]="['users']" class="navbar-brand"> Users </a>
           </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['doctors']" class="navbar-brand"> Doctors </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['patients']" class="navbar-brand"> Patients </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['appointments']" class="navbar-brand"> Appointments </a>
+          </li>
+          
           
         </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="isAuth()">
+        <ul class="nav navbar-nav navbar-right" *ngIf="true">
+          <li routerLinkActive="active">
+            <a [routerLink]="['settings']" class="navbar-brand"> Settings </a>
+          </li>
           <li><a (click)="onLogout()" style="cursor: pointer;" class="navbar-brand"> Logout </a></li>
-        
         </ul>
       </div>
   </div>

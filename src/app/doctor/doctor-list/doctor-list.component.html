@@ -1,0 +1,19 @@
+<div class='error-message alert alert-danger' *ngIf='errorMessage'>Error:
+	{{errorMessage}}</div>
+
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<h1>{{pageTitle}}</h1>
+	</div>
+</div>
+
+<div class="row" *ngIf='allDoctors'>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 col-xs-6">
+			<ul class="list-group">
+				<app-doctor-item *ngFor="let doctor of allDoctors; let i = index"
+					[doctor]="doctor" [doctorId]="doctor.id" [itemIndex]="i+1"></app-doctor-item>
+			</ul>
+		</div>
+	</div>
+</div>
