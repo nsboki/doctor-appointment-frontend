@@ -8,6 +8,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserManagementComponent } from './user/user-management/user-management.component';
 import { HomeComponent } from './home/home.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 
 // Services
@@ -26,7 +27,7 @@ const appRoutes: Routes = [
     //PUBLIC
     { 
         path: 'login',
-        component: LoginFormComponent
+        component: LoginComponent
     },
     {
         path: 'home',

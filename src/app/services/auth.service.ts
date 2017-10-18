@@ -1,3 +1,4 @@
+import { LoginUser } from '../models/login-user';
 import { IUser } from '../user/user';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
@@ -13,15 +14,26 @@ export const AngularServerUrl: string = "http://" + GeneralServerIp + ":4200";
 export class AuthService {
 
   private authenticated: boolean;
+  private headers: Headers = new Headers({'Content-Type': 'application/json'});
+  private loggedInUser: LoginUser;
+  
   authHeaders: Headers;
 
-  constructor(private http: Http, private _router: Router) {
+  constructor(private _http: Http, private _router: Router) {
   }
   
-  login() {
-    this.authenticated = true;
-    console.log(this.isAuthenticated());
+  login(user: LoginUser){
+    let url: string = ServerUrl+`/api/auth/login`;
+    this._http.post(url, user)
+        .subscribe(user => {this.loggedInUser = <IUser> user.json(),
+          localStorage.setItem('token', user.json().auth_token)}
+          )
   }
+  
+//  login() {
+//    
+//    this.authenticated = true;
+//  }
   logout() {
     this.authenticated = false;
     this._router.navigate(["/login"]);
@@ -63,7 +75,7 @@ export class AuthService {
 //    else {
 //      options = this._setRequestOptions();
 //    }
-    return this.http.get(url, this._setRequestOptions(options));
+    return this._http.get(url, this._setRequestOptions(options));
   }
   /**
    * @param options if options are not supplied the default content type is application/json
@@ -78,7 +90,7 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-    return this.http.put(url, body, options);
+    return this._http.put(url, body, options);
   }
   /**
    * @param options if options are not supplied the default content type is application/json
@@ -91,7 +103,7 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-    this.http.delete(url, options)
+    this._http.delete(url, options)
       .subscribe((data)=>{
         console.log(data)});
 //    this._router.navigate(['../']);
@@ -110,8 +122,8 @@ export class AuthService {
     else {
       options = this._setRequestOptions();
     }
-    this.http.post(url, body, options).subscribe((res)=>{response = res});
-    return this.http.post(url, body, options);
+    this._http.post(url, body, options).subscribe((res)=>{response = res});
+    return this._http.post(url, body, options);
   }
 
   private _setRequestOptions(options?: RequestOptions) {

@@ -29,6 +29,7 @@ import { DoctorDetailComponent } from './doctor/doctor-detail/doctor-detail.comp
 import { DoctorService } from './doctor/doctor.service';
 import { DoctorStartComponent } from './doctor/doctor-start.component';
 import { AuthGuard } from './services/auth.guard';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AuthGuard } from './services/auth.guard';
     DoctorListComponent,
     DoctorItemComponent,
     DoctorDetailComponent,
-    DoctorStartComponent
+    DoctorStartComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,13 @@ import { AuthGuard } from './services/auth.guard';
     AppGlobalRouting,
     ReactiveFormsModule
   ],
-  providers: [AuthProviders, ApiService, UserService, DoctorService, AuthGuard],
+  providers: [
+    AuthProviders, 
+    ApiService, 
+    UserService, 
+    DoctorService, 
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

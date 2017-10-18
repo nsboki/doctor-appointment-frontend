@@ -1,3 +1,4 @@
+import { ILogin } from '../login-form/login';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
@@ -17,6 +18,7 @@ import { IUser } from './user';
 export class UserService {
 
     userChanged = new EventEmitter<IUser[]>();
+    loggedInUser: IUser;
     errorMessage: string;
     allUsers:IUser[];
   
@@ -45,8 +47,6 @@ export class UserService {
     updateUser(newUser: IUser) {
       this._http.put(this._apiService.ServerUrl + "/api/users/save", newUser)
         .subscribe((data) => this.emitUserChanges())
-//        return this._authService.AuthPost(this._apiService.ServerUrl + "/api/users"+ userId + "save", newUser)
-//            .catch(this._apiService.handleError);
       
     }
 
@@ -54,30 +54,22 @@ export class UserService {
       this._http.delete(this._apiService.ServerUrl + "/api/users/" + userId)
                     .subscribe(
                     (data: any) => {this.emitUserChanges()});
-//        this._authService.AuthDelete(this._apiService.ServerUrl + "/api/users/" + userId)
-//            .map((response: Response) => this.userChanged.emit(<IUser[]> response.json()))
-//            .do(data => console.log('All returned users: ' +  JSON.stringify(data)))
-//          .catch(this._apiService.handleError);
-//      this.getUsers().subscribe(
-//          users => 
-//          this.userChanged.emit(users),
-//          error => this.errorMessage = <any>error);
     }
-//    private _setRequestOptions(options?: RequestOptions) {
-//      
-//    if (!options) {
-//      this.authHeaders = new Headers();
-//      this.authHeaders.set('Content-Type', 'application/json');
-//      options = new RequestOptions({ headers: this.authHeaders});
-//    }
-//    
-//    return options;
-//
-//}
-  emitUserChanges() {
-    this.getUsers().subscribe(
+    emitUserChanges() {
+      this.getUsers().subscribe(
         users => 
         this.userChanged.emit(users)
       )
+    }
+  
+  loginUser(loginUser: ILogin) {
+    this._http.post(this._apiService.ServerUrl + "/auth/login", loginUser)
+      .subscribe(user => this.loggedInUser = <IUser> user.json())
+        
+                
+  }
+  
+  getLoggedInUser() {
+    return this.loggedInUser;
   }
 }

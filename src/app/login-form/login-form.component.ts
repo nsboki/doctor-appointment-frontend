@@ -16,11 +16,17 @@ export class LoginFormComponent implements OnInit {
   }
   
   loginUser(event) {
-//    var username = event.target.element[0].value;
-//    var password = event.target.element[0].value;
-//    console.log(username,password);
-    this._authService.login();
-      this._router.navigate(['home']);
+    var username = event.target.element[0].value;
+    var password = event.target.element[0].value;
+    console.log(username,password);
+    this._user.loginUser({"username": username, "password": password});
+    if(this._user.getLoggedInUser) {
+//      this._authService.login();
+    } else {
+      this._authService.logout();
+    }
+    console.log(this._authService.isAuthenticated());
+//      this._router.navigate(['home']);
 //    if(username == 'admin' && password == 'admin') {
 ////      this._user.setUserLoggedIn();
 //    } 
